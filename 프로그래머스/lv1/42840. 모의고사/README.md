@@ -2,6 +2,17 @@
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42840) 
 
+### 리뷰
+
+- int maxScore = Math.max(score[0], Math.max(score[1], score[2]));
+    - 최고 점수를 구할 때, Math.max(비교값 1, Math.max(비교값1, 비교값2)); 의 방식을 이용하는 방식이다.
+- list.stream().mapToInt(i->i.intValue()).toArray();
+    - Arraylist를 배열로 변환하지 않고, 바로 위의 표현식을 통해 배열로 변환해서 출력
+    1. list.stream() → ArrayList<Integer> 를 Stream<Integer> 로 변환
+    2. mapToInt(Function)은 내부적으로 for문을 돌면서 Integer i를 int로 바꿉니다.
+        1. • mapToInt() : IntStream으로 바꿔주는 메서드
+    3. toArray()는 IntStream 객체를 배열로 변환해주는 함수입니다.
+
 ### 성능 요약
 
 메모리: 78.8 MB, 시간: 2.72 ms
