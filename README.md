@@ -1,8 +1,8 @@
 
 ## Study
 
-* 221122(Mon) 1주일 2~3개 [Programmers](https://programmers.co.kr/) 풀기 스터디 시작!
-
+* 221222(Thu) 1주일 2~3개 [Programmers](https://programmers.co.kr/) 풀기 스터디 시작!
+* 만약에 Programmers로 부족하면, [Baekjoon](https://www.acmicpc.net/) 으로 보완하자!
 
 
 
