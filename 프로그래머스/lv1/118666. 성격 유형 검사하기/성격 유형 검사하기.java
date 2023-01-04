@@ -1,28 +1,32 @@
-import java.util.*;
+import java.util.HashMap;
 
 class Solution {
-    private Map<Character, Integer> typeMap = new HashMap();
     public String solution(String[] survey, int[] choices) {
-        StringBuilder sb = new StringBuilder();
-        int[] score = {0, 3, 2, 1, 0, 1, 2, 3};
-        char[] types = {'R', 'T', 'C', 'F', 'J', 'M', 'A', 'N'};
-        
-        for (int i=0; i<types.length; i++)
-            typeMap.put(types[i], 0);
-        
-        for (int i = 0; i < survey.length; i++) {
-            int pos = 0;
-            if (choices[i] >= 5) pos = 1;
+        String answer = "";
+        char [][] type = {{'R', 'T'}, {'C', 'F'}, {'J', 'M'}, {'A', 'N'}};
+        int [] score = {0, 3, 2, 1, 0, 1, 2, 3};
+        HashMap<Character, Integer> point = new HashMap<Character, Integer>();
 
-            typeMap.put(survey[i].charAt(pos), typeMap.get(survey[i].charAt(pos))+score[choices[i]]);
+        // 점수 기록할 배열 초기화 
+        for (char[] t : type) {
+            point.put(t[0], 0);
+            point.put(t[1], 0);
         }
-        
-        for (int i=0; i<types.length; i+=2) {
-            if (typeMap.get(types[i]) >= typeMap.get(types[i+1]))
-                sb.append(types[i]);
-            else 
-                sb.append(types[i+1]);
+
+        // 점수 기록 
+        for (int idx = 0; idx < choices.length; idx++){
+            if(choices[idx] > 4){
+                point.put(survey[idx].charAt(1), point.get(survey[idx].charAt(1)) + score[choices[idx]]);
+            } else {
+                point.put(survey[idx].charAt(0), point.get(survey[idx].charAt(0)) + score[choices[idx]]);
+            }
         }
-        return sb.toString();
+
+        // 지표 별 점수 비교 후 유형 기입
+        for (char[] t : type) {
+            answer += (point.get(t[1]) <= point.get(t[0])) ? t[0] : t[1];
+        }
+
+        return answer;
     }
 }
