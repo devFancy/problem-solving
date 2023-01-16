@@ -1,22 +1,16 @@
-import java.util.*;
-
 class Solution {
-    public boolean solution(int x) {
-        boolean answer = true;
+    public boolean solution(int num) {
+        String[] temp = String.valueOf(num).split("");
+
         int sum = 0;
-        int number = x;
-        
-        while(number > 0) {
-            int div = number % 10;
-            sum += div;
-            number /= 10;
+        for (String s : temp) {
+            sum += Integer.parseInt(s);
         }
-        if(x % sum == 0) {
-            answer = true;
+
+        if (num % sum == 0) {
+                return true;
         } else {
-            answer = false;
+          return false;
         }
-        
-        return answer;
     }
 }
