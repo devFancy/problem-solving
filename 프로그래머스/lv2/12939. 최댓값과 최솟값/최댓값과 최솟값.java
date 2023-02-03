@@ -2,17 +2,18 @@ import java.util.*;
 
 class Solution {
     public String solution(String s) {
-        String answer = "";
-        ArrayList<Integer> arr = new ArrayList<Integer>();
+        int max, min, n;
         String [] str = s.split(" ");
         
+        max = min = Integer.parseInt(str[0]);
+        
         for(int i = 0; i < str.length; i++) {
-            arr.add(Integer.parseInt(str[i]));
+            n = Integer.parseInt(str[i]);
+            if(max < n) max = n;
+            if(min > n) min = n;
         }
         
-        answer = "" + Collections.min(arr) + " " + Collections.max(arr);
-    
-        return answer;
+        return min + " " + max;
     }
 }
 
