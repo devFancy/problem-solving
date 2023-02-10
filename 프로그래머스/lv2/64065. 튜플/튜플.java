@@ -1,36 +1,16 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Arrays;
-
+import java.util.*;
 class Solution {
-    public ArrayList<Integer> solution(String s) {
-    
-        ArrayList<Integer> answer = new ArrayList<>();
-        
-        s = s.substring(2, s.length());
-        s = s.substring(0, s.length() -2).replace("},{", "-");
-        
-        String str[] = s.split("-");
-        Arrays.sort(str, new Comparator<String>() {
-            public int compare(String s1, String s2) {
-                
-                return s1.length() - s2.length();
-            }
-        });
- 
-        for(String x : str) {
-            String [] temp = x.split(",");
-            
-            for(int i = 0; i < temp.length; i++) {
-                
-                int n = Integer.parseInt(temp[i]);
-                
-                if(!answer.contains(n)) {
-                    answer.add(n);
-                }
+    public int[] solution(String s) {
+        Set<String> set = new HashSet<>();
+        String[] arr = s.replaceAll("[{]", " ").replaceAll("[}]", " ").trim().split(" , ");
+        Arrays.sort(arr, (a, b)->{return a.length() - b.length();});
+        int[] answer = new int[arr.length];
+        int idx = 0;
+        for(String s1 : arr) {
+            for(String s2 : s1.split(",")) {
+                if(set.add(s2)) answer[idx++] = Integer.parseInt(s2);
             }
         }
-        
         return answer;
     }
 }
