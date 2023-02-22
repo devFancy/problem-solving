@@ -8,11 +8,11 @@
 
 ## Problem
 
-* Programmers Level 1 부터 문제 풀기 !
+* Programmers Level 1 부터 문제 풀기(복습) !
 
-* 순서 : Lv1 -> Lv2 -> Lv3
+* 순서 : Lv1 -> Lv2 -> Lv3 / Class 2++ -> Class 3++
 
-* 목표는 Lv3 풀 수 있는 수준의 실력을 갖추는 것.
+* 목표는 Lv3 풀 수 있는 수준의 실력을 유지하는 것.
 
 
 ## Retrospective
