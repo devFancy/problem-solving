@@ -1,41 +1,18 @@
-import java.util.*;
-
 class Solution {
     public int solution(int n, int k) {
-        int answer = 0;
-        String temp = "";
-        
-        //N진법 변환
-        while(n != 0) {
-            temp = n % k + temp;
-            n /= k;
+
+        int ans = 0;
+        String temp[] = Integer.toString(n, k).split("0");
+
+        Loop : for(String t : temp) {
+            if(t.length() == 0) continue;
+            long a = Long.parseLong(t);
+            if(a == 1) continue;
+            for(int i=2; i<=Math.sqrt(a); i++)
+                if(a%i == 0) continue Loop;
+
+            ans++;
         }
-        
-        String [] arr = temp.split("0");
-        
-        for(String str : arr) {
-            if(str.equals("")) {
-                continue;
-            }
-            long num = Long.parseLong(str);
-            if(isPrime(num)) {
-                answer++;
-            }
-        }
-        
-        return answer;
+        return ans;
     }
-    
-    // 소수 확인 메서드
-    public boolean isPrime(long decimal) {
-        if(decimal < 2)
-            return false;
-        for(int i = 2; i <= Math.sqrt(decimal); i++) {
-            if(decimal % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
 }
