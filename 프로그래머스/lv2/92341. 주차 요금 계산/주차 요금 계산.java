@@ -1,59 +1,76 @@
 import java.util.*;
-
+ 
 class Solution {
     public int[] solution(int[] fees, String[] records) {
-        int[] answer = {};
-        
-        Map<String, String> map = new HashMap<>();
-        Map<String, Integer> feeMap = new HashMap<>();
-        
-        for(int i = 0; i < records.length; i++){
-            feeMap.put(records[i].split(" ")[1], 0);
-        }
-        
-        for(int i = 0; i < records.length; i++){
-            String[] infos = records[i].split(" ");
-            
-            if(map.containsKey(infos[1])){
-                String[] inTime = map.remove(infos[1]).split(":");
-                String[] outTime = infos[0].split(":");
-                
-                int hour = Integer.parseInt(outTime[0]) - Integer.parseInt(inTime[0]);
-                int minute = Integer.parseInt(outTime[1]) - Integer.parseInt(inTime[1]);
-                
-                feeMap.replace(infos[1], feeMap.get(infos[1]) + 60 * hour + minute);
-                
-            }else{
-                map.put(infos[1], infos[0]); // 차 번호, 시간
+ 
+        int std_time =fees[0];
+        int std_pay=fees[1];
+        int per_time=fees[2];
+        int per_pay=fees[3];
+ 
+        //key: 차량번호, value: 입장 시간
+        Map<Integer,Integer> map = new HashMap<>();
+        //key: 차량번호, value: 주차 요금
+        Map<Integer,Integer> result = new TreeMap<>();
+        // 주차기록 처리하기
+        for(String data: records){
+            String[] temp =data.split(" ");
+            int time = cal_time(temp[0]);
+            int car_num= Integer.parseInt(temp[1]);
+            String state= temp[2];
+            if(state.equals("OUT")){
+               int start=map.get(car_num);
+               int use_time= time-start;            
+                if(result.containsKey(car_num)){
+                  int a=result.get(car_num);
+                  use_time+=a;
+                }
+                result.put(car_num,use_time);
+                map.remove(car_num);
+                continue;
             }
+            map.put(car_num,time);
         }
-        
-        for(String key : map.keySet()){
-            String[] inTime = map.get(key).split(":");
-            
-            int hour = 23 - Integer.parseInt(inTime[0]);
-            int minute = 59 -Integer.parseInt(inTime[1]);
-            
-            feeMap.replace(key, feeMap.get(key) + 60 * hour + minute);
-        }
-        
-        List<Map.Entry<String, Integer>> list = new ArrayList(feeMap.entrySet());
-        Collections.sort(list, (o1, o2) -> {
-            return Integer.parseInt(o1.getKey()) > Integer.parseInt(o2.getKey())?1 : 
-            Integer.parseInt(o1.getKey()) < Integer.parseInt(o2.getKey())?-1 : 0;
-        });
-        
-
-        answer = new int[list.size()];
-        
-        for(int i = 0; i < answer.length; i++){
-            if(list.get(i).getValue() > fees[0]){
-                answer[i] = fees[1] + (int) Math.ceil((list.get(i).getValue() - fees[0]) / (double)fees[2]) * fees[3];
-            }else{
-                answer[i] = fees[1];
+ 
+        // 아직 안나간 차량 처리
+            for(int num :map.keySet()){
+                Integer d=map.get(num);
+                d = d==null?0:d;
+ 
+                int start = d.intValue();
+                int use_time=1439-start;
+ 
+                Integer e=result.get(num);
+                e = e==null?0:e;
+ 
+                int total= e.intValue();
+ 
+                result.put(num,total+use_time);
             }
+ 
+        // 출력하기
+        int[] answer = new int[result.size()];
+        int i=0;
+        for(int data: result.keySet()){
+            int time=result.get(data);
+ 
+            if(time<=std_time){
+                time=std_pay;
+            }
+            else{
+                time=std_pay+(int)Math.ceil((double)(time-std_time)/per_time)*per_pay;
+            }      
+            answer[i]=time;
+            i++;
         }
-        
+ 
         return answer;
+    }
+ 
+     public int cal_time(String time){
+        String[] temp= time.split(":");
+        int hour= Integer.parseInt(temp[0])*60;
+        int min= Integer.parseInt(temp[1]);       
+        return hour+min;
     }
 }
