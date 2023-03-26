@@ -1,37 +1,35 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-class Solution {
+public class Solution {
     public String[] solution(String[] record) {
-        Map<String, String> idMap = new HashMap<>(); // (아이디 - 닉네임) Map
-        int count = 0; // Change할 때마다 +1 증가
-        
-        for(int i = 0; i < record.length; i++) {
-            String [] info = record[i].split(" ");
-            
-            if(info[0].equals("Leave")) {
-                continue;
-            } else if(info[0].equals("Enter")) {
-                idMap.put(info[1], info[2]);
-            } else {
-                idMap.put(info[1], info[2]);
-                count++;
+        HashMap<String, String> codeMap = new HashMap<String, String>();
+        codeMap.put("enter","들어왔습니다.");
+        codeMap.put("leave","나갔습니다.");
+
+        HashMap<String, String> uidMap = new HashMap<String, String>();
+        List<String> list = new ArrayList<String>();
+        for(String str:record){
+            String[] split = str.split("\\s+");
+            String code = split[0];
+            String uid = split[1];
+            if(split.length > 2) {
+                String name = split[2];
+                uidMap.put(uid, name);
             }
-        }
-        
-        String[] answer = new String[record.length - count];
-        int idx = 0;
-        
-        for(int i = 0; i < record.length; i++) {
-            String [] info = record[i].split(" ");
-            String nickname = idMap.get(info[1]);
-            
-            if(info[0].equals("Enter")) {
-                answer[idx++] = nickname + "님이 들어왔습니다.";
-            } else if(info[0].equals("Leave")) {
-                answer[idx++] = nickname + "님이 나갔습니다.";
+            if(!"Change".equalsIgnoreCase(code)){
+                list.add(code +" "+uid);
             }
+
         }
-        
+        String[] answer = new String[list.size()];
+        for(int i=0;i<answer.length;i++){
+            String[] split = list.get(i).split("\\s+");
+            String name = uidMap.get(split[1]);
+            answer[i] = name+"님이 "+ codeMap.get(split[0].toLowerCase());
+        }
+
         return answer;
     }
 }
