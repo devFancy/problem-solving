@@ -51,10 +51,10 @@ class Solution {
         for (int i = 0; i < others.length(); i++)
             combination(order + others.charAt(i), others.substring(i + 1), count - 1);
     }
-    public static void main(String[] args){
-        Solution sol = new Solution();
-        String[] orders = {"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
-        int[] course = {2,3,4};
-        System.out.println(sol.solution(orders, course));
-    }
+    // public static void main(String[] args){
+    //     Solution sol = new Solution();
+    //     String[] orders = {"ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"};
+    //     int[] course = {2,3,4};
+    //     System.out.println(sol.solution(orders, course));
+    // }
 }
