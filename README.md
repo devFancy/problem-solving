@@ -28,3 +28,15 @@
 * solved.ac Class 3++ : 총 3문제 풀기 완료
 
 * Programmers - SQL : Lv2 총 4문제 풀기 완료
+
+> 2300301 ~ 230331
+
+* Programmers : Lv2 총 9문제 풀기 완료
+
+* solved.ac Class 3++ : 총 1문제 풀기 완료
+
+* Programmers - SQL : Lv2-3 총 9문제 풀기 완료
+
+> 230401 ~ 230430
+
+* Programmers : Lv2-3 총 2문제 풀기 완료
