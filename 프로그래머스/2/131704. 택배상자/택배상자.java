@@ -1,31 +1,27 @@
-import java.util.*;
 
+import java.util.*;
 class Solution {
     public int solution(int[] order) {
         int answer = 0;
-        Stack<Integer> sub_container = new Stack<>(); // 보조 컨테이너 벨트
-        int container_box = 1; // 현재 메인 컨테이너에 있는 박스
-        for(int o : order) {
-            while(container_box <= order.length) {
-                if(container_box == o) break;
-                else if (!sub_container.isEmpty() && sub_container.peek() == o) break;
-                else {
-                    sub_container.push(container_box);
-                    container_box++;
+        int cnt = 0;
+
+        Stack<Integer> 보조 = new Stack<>();
+        Queue<Integer> 기존 = new LinkedList<>();
+
+            for(int i=0; i<order.length; i++){
+                보조.add(i+1);
+
+                while(!보조.isEmpty()){
+                    if(보조.peek() == order[cnt]){
+                        기존.offer(보조.pop());
+                        cnt++;
+                    }else break;
+
                 }
-            } 
-        
-            if(container_box == o) {
-                container_box++;
-                answer++;
-            } else if(!sub_container.isEmpty() && sub_container.peek() == o) {
-                sub_container.pop(); 
-                answer++;
-            } else {
-                break;
             }
-        }
-        
+        // System.out.println("보조 : " + 보조.toString());
+        // System.out.println("기존 : " + 기존.toString());
+        answer = 기존.size();
         return answer;
     }
 }
