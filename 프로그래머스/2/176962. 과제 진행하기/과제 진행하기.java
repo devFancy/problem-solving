@@ -19,8 +19,9 @@ class Solution {
         }
     }
     
+    
     public List<String> solution(String[][] plans) {
-    	// 정답을 저장할 리스트
+        // 정답을 저장할 리스트
         List<String> answer = new ArrayList<>();
         
         // 해야할 과제들을 시작시간 순으로 저장
@@ -31,10 +32,11 @@ class Solution {
         for(int i = 0; i < plans.length; i++) {
             String name = plans[i][0];
             
-            String[] str = plans[i][1].split(":");
+            String [] str = plans[i][1].split(":");
+            
             int h = Integer.parseInt(str[0]);
             int m = Integer.parseInt(str[1]);
-            int start = (h * 60) + m; // '분' 기준으로 합침
+            int start = (h * 60) + m;
             
             int time = Integer.parseInt(plans[i][2]);
             
@@ -58,7 +60,7 @@ class Solution {
             if(!pq.isEmpty()) {
                 Task nextTask = pq.peek();
                 
-                // 지금 과제를 끝내고도 다음 과제 시작까지 시간이 남는 경우
+                // 1-1) 지금 과제를 끝내고도 다음 과제 시작까지 시간이 남은 경우
                 if(currentTime + curPlaytime < nextTask.start) {
                     answer.add(curName);
                     currentTime += curPlaytime;
@@ -67,12 +69,12 @@ class Solution {
                     while(!remainingTasks.isEmpty()) {
                         Task rem = remainingTasks.pop();
                         
-                        // 다음 새로운 과제 시작전까지 다 끝낼수 있는 경우
+                        // 다음 새로운 과제 시작전까지 다 끝낼 수 있는 경우
                         if(currentTime + rem.playtime <= nextTask.start) {
                             currentTime += rem.playtime;
                             answer.add(rem.name);
                             continue;
-                        } 
+                        }
                         // 다음 새로운 과제 시작전까지 못 끝내는 경우
                         else {
                             int t = rem.playtime - (nextTask.start - currentTime);
@@ -82,31 +84,28 @@ class Solution {
                         }
                     }
                 }
-                // 지금 과제 끝내면 새로운 과제 시작할 시간인 경우
+                // 1-2) 지금 과제 끝내면 새로운 과제 시작할 시간인 경우
                 else if(curStart + curPlaytime == nextTask.start) {
                     answer.add(curName);
                     continue;
                 }
-                // 새로운 과제 시작전까지 지금 과제를 못 끝내는 경우
+                // 1-3) 새로운 과제 시작전까지 지금 과제를 못 끝내는 경우
                 else {
                     int t = (nextTask.start - currentTime);
-                    remainingTasks.push(new Task(curName, curPlaytime - t));
+                    remainingTasks.push(new Task(curName, curPlaytime -t));
                 }
-                
             }
-            
             // 2) 더 이상 남아있는 새로운 과제가 없는 경우
             else {
-                // 남아있는 과제(잠시 멈춘 과제)도 없는 경우
+                // 2-1) 남아있는 과제(잠시 멈춘 과제)도 없는 경우
                 if(remainingTasks.isEmpty()) {
                     currentTime += curPlaytime;
                     answer.add(curName);
                 }
-                // 남아있는 과제는 있는 경우
+                // 2-2) 남아있는 과제가 있는 경우
                 else {
                     answer.add(curName); // 새로운 과제부터 먼저 해결
-                    
-                    // 남아있는 과제들을 정해진 순서대로 끝내면 됨
+                    // 남아있는 과제들을 정해진 순서대로 끝냄
                     while(!remainingTasks.isEmpty()) {
                         Task rem = remainingTasks.pop();
                         answer.add(rem.name);
@@ -114,6 +113,7 @@ class Solution {
                 }
             }
         }
+        
         
         return answer;
     }
