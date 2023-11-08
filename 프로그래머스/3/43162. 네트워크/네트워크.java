@@ -10,8 +10,9 @@ class Solution {
         
         for(int i = 0; i < computers.length; i++) {
             if(visited[i] == false) { // 해당 노드를 방문하지 않았을 경우
-                answer++; // 새로운 네트워크 찾았으므로 +1 증가
+            
                 dfs(i, visited, computers);
+                answer++; // 새로운 네트워크 찾았으므로 +1 증가
             }
         }
         
