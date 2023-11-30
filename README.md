@@ -50,3 +50,6 @@
 * Programmers: Lv2 총 8문제 풀기 완료
 
 > 231101 ~ 231130
+
+* Programmers: Lv2 총 5문제 풀기 완료
+* Baekjoon: solved.ac Class3++ 비슷한 수준으로 총 5문제 풀기 완료
