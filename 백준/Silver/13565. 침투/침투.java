@@ -4,7 +4,6 @@ import java.io.*;
 class Main {
     static final int MAX = 1000 + 10;
     static boolean[][] map;
-    static boolean[][] visited;
     static int M, N;
     static int dirX[] = {-1, 1, 0, 0};
     static int dirY[] = {0, 0, -1, 1};
@@ -16,11 +15,11 @@ class Main {
             return;
         }
 
-        visited[y][x] = true;
+        map[y][x] = false;
         for(int i = 0; i < 4; i++) {
             int newX = x + dirX[i];
             int newY = y + dirY[i];
-            if(map[newY][newX] && visited[newY][newX] == false)
+            if(map[newY][newX])
                 dfs(newY, newX);
         }
     }
@@ -35,7 +34,6 @@ class Main {
         M = Integer.parseInt(st.nextToken());
 
         map = new boolean[MAX][MAX];
-        visited = new boolean[MAX][MAX];
 
         // 1. map에 정보 반영하기
         for(int i = 1; i <= N; i++) {
