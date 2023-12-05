@@ -4,15 +4,15 @@ import java.io.*;
 class Main {
     static final int MAX = 50 + 10;
     static char[][] map;
-    static boolean[][] visited;
 
     public static void dfs(int y, int x) {
-        visited[y][x] = true;
+        char cur = map[y][x];
+        map[y][x] = 0;
 
-        if(map[y][x] == '-' && map[y][x+1] == '-') {
+        if(cur == '-' && map[y][x+1] == '-') {
             dfs(y, x+1);
         }
-        if(map[y][x] == '|' && map[y+1][x] == '|') {
+        if(cur == '|' && map[y+1][x] == '|') {
             dfs(y+1, x);
         }
 
@@ -27,7 +27,6 @@ class Main {
         int M = Integer.parseInt(st.nextToken());
 
         map = new char[MAX][MAX];
-        visited = new boolean[MAX][MAX];
 
 
         // 1. map에 정보 반영
@@ -40,7 +39,7 @@ class Main {
         int answer = 0;
         for(int i = 1; i <= N; i++) {
             for(int j = 1; j <= M; j++) {
-                if(visited[i][j] == false) {
+                if(map[i][j] != 0) { // 0이 있다면, 이미 방문했다는 의미
                     dfs(i, j);
                     answer++;
                 }
