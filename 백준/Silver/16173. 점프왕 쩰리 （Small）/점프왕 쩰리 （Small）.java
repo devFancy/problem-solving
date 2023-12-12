@@ -6,17 +6,17 @@ public class Main {
     static int[][] map;
     static int[] dirX = {0, 1};
     static int[] dirY = {1, 0};
-    static boolean[][] visited;
     static int N;
     public static void dfs(int y, int x) {
-        visited[y][x] = true;
+        int value = map[y][x];
+        map[y][x] = 0;
         if(y == N && x == N) return;
 
         for(int i = 0; i < 2; i++) {
-            int newY = y + dirY[i] * map[y][x];
-            int newX = x + dirX[i] * map[y][x];
+            int newY = y + dirY[i] * value;
+            int newX = x + dirX[i] * value;
 
-            if(visited[newY][newX] == false) {
+            if(value != 0) {
                 dfs(newY, newX);
             }
         }
@@ -29,7 +29,6 @@ public class Main {
 
         N = Integer.parseInt(br.readLine());
         map = new int[MAX][MAX];
-        visited = new boolean[MAX][MAX];
 
         // 1. map에 정보 반영하기 
         for(int i = 1; i <= N; i++) {
@@ -43,8 +42,8 @@ public class Main {
         dfs(1,1);
 
         // 3. 출력하기
-        if(visited[N][N] == false) bw.write("Hing");
-        else bw.write("HaruHaru");
+        if(map[N][N] == 0) bw.write("HaruHaru");
+        else bw.write("Hing");
         
         bw.close();
         br.close();
