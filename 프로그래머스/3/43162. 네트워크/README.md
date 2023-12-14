@@ -1,10 +1,10 @@
 # [level 3] 네트워크 - 43162 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/43162) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/43162#) 
 
 ### 성능 요약
 
-메모리: 66.3 MB, 시간: 0.20 ms
+메모리: 71.4 MB, 시간: 0.10 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2023년 11월 3일 16:29:55
+2023년 12월 4일 12:55:55
 
 ### 문제 설명
 
