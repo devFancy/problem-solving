@@ -2,37 +2,38 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] queue1, int[] queue2) {
-        Queue<Integer> que1 = new LinkedList<>();
-        Queue<Integer> que2 = new LinkedList<>();
-        
-        long sum1 = 0, sum2 = 0;
+        int[] totalQueue = new int[queue1.length + queue2.length];
+        long queue1Sum = 0;
+        long queue2Sum = 0;
+
         for(int i = 0; i < queue1.length; i++) {
-            sum1 += queue1[i];
-            que1.offer(queue1[i]);
+            int val = queue1[i];
+            totalQueue[i] = val;
+            queue1Sum += val;    
         }
 
-        for(int i = 0; i < queue2.length; i++) {
-            sum2 += queue2[i];
-            que2.offer(queue2[i]);
+        for(int i = queue1.length; i < queue1.length + queue2.length; i++) {
+            int val = queue2[i - queue1.length];
+            totalQueue[i] = val;
+            queue2Sum += val;    
         }
+
+        if((queue1Sum + queue2Sum) % 2 == 1) return -1;
 
         int count = 0;
-        while(sum1 != sum2) {
-            count++;
-
-            if(sum1 > sum2) {
-                int value = que1.poll();
-                sum1 -= value;
-                sum2 += value;
-                que2.offer(value);
+        int left = 0;
+        int right = queue1.length;
+        long half = (queue1Sum + queue2Sum) / 2;
+        while(left < right && right < totalQueue.length) {
+            if(queue1Sum == half) {
+                return count;
+            } else if(queue1Sum > half) {
+                queue1Sum -= totalQueue[left++];
             } else {
-                int value = que2.poll();
-                sum1 += value;
-                sum2 -= value;
-                que1.offer(value);
+                queue1Sum += totalQueue[right++];
             }
-            if(count > (queue1.length + queue2.length) * 2) return -1;
+            count++;
         }
-        return count;
+        return -1;
     }
 }
