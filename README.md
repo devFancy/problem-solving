@@ -53,3 +53,8 @@
 
 * Programmers: Lv2 총 5문제 풀기 완료
 * Baekjoon: solved.ac Class3++ 비슷한 수준으로 총 5문제 풀기 완료
+
+> 231201 ~ 231231
+
+* Programmers && Baekjoon 9문제 풀기 완료
+* Programmers - SQL : String,Date 6문제 / Join 2문제 풀기 완료
