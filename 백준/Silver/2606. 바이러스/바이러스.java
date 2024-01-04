@@ -1,47 +1,51 @@
-import java.io.*;
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
 
-public class Main {
-    static boolean [] checked;
-    static int [][] arr;
-    static int node, line;
 
-    static int count = 0;
+class Main {
+    static boolean[][] graph;
+    static boolean[] visited;
+    static int N, M;
+    static int answer;
 
-    public static void main(String[] args) throws IOException {
+    public static void dfs(int idx) {
+        visited[idx] = true;
+        answer++;
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        node = Integer.parseInt(br.readLine());
-        line = Integer.parseInt(br.readLine());
-
-        arr = new int[node+1][node+1];
-        checked = new boolean[node+1];
-
-        for(int i = 0; i < line; i++) {
-            StringTokenizer str = new StringTokenizer(br.readLine());
-
-            int a = Integer.parseInt(str.nextToken());
-            int b = Integer.parseInt(str.nextToken());
-
-            arr[a][b] = arr[b][a] = 1;
-        }
-        dfs(1);
-        
-        System.out.println(count-1);
-    }
-    public static void dfs(int start) {
-        checked[start] = true;
-        count++;
-
-        for(int i = 0; i <= node; i++) {
-            if(arr[start][i] == 1 && !checked[i]) {
+        for(int i = 1; i <= N; i++) {
+            if(visited[i] == false && graph[idx][i]) {
                 dfs(i);
             }
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        // 0. 입력 및 초화
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        N = Integer.parseInt(br.readLine());
+        M = Integer.parseInt(br.readLine());
+
+        graph = new boolean[N + 1][N + 1];
+        visited = new boolean[N + 1];
+
+        // 1. graph에 연결 정보 채우기
+        int x, y;
+        for(int i = 0; i < M; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            x = Integer.parseInt(st.nextToken());
+            y = Integer.parseInt(st.nextToken());
+            graph[x][y] = true;
+            graph[y][x] = true;
+        }
+        // 2. dfs(재귀함수) 호출
+        dfs(1);
+
+        // 3. 출력
+        bw.write(String.valueOf(answer -1));
+        
+        br.close();
+        bw.close();
     }
 }
