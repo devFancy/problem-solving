@@ -1,3 +1,6 @@
+
+// 섬의 개수 - 복습(24.01.16)
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -42,6 +45,7 @@ public class Main {
             map = new boolean[MAX][MAX];
             visited = new boolean[MAX][MAX];
 
+            // 1. map 정보 반영
             for(int i = 1; i <= N; i++) {
                 int x;
                 st = new StringTokenizer(br.readLine());
