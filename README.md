@@ -58,3 +58,12 @@
 
 * Programmers && Baekjoon 9문제 풀기 완료
 * Programmers - SQL : String,Date 6문제 / Join 2문제 풀기 완료
+
+> 240101 ~ 240128
+
+* Programmers && Baekjoon 14문제 풀기 완료(복습 포함)
+* Programmers - SQL : Join 4문제 풀기 완료
+
+> 240201 ~
+
+[codetree-TILs](https://github.com/devFancy/codetree-TILs) 에서 알고리즘 공부
